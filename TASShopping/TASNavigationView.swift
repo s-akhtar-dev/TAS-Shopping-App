@@ -36,6 +36,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         manager.delegate = self
         manager.requestWhenInUseAuthorization()
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    func requestLocation() {
+        manager.requestWhenInUseAuthorization()
+        manager.requestLocation()
     }
 
     func startTracking() {
@@ -44,6 +50,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     func stopTracking() {
         manager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error: \(error.localizedDescription)")
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

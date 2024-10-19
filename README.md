@@ -14,7 +14,7 @@ This repository contains an iOS application designed to aid with navigation thro
 3. Build and run the app on an iOS 17.5 device.
 
 ## Shopping App Structure
-- **TASShoppingApp.swift**: Main view where users input grocery lists and store details.
+- **TASContentView.swift**: Main view where users input grocery lists and store details.
 - **TASImageView.swift**: Displays the route image returned by the API.
 - **TASDirectionsView.swift**: Voice navigation for in-store guidance.
 - **TASAccountView.swift**: User account settings (temporary structure).

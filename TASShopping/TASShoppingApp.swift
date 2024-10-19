@@ -11,7 +11,7 @@ import SwiftUI
 struct TASShoppingApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TASContentView()
         }
     }
 }

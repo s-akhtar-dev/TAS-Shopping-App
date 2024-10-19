@@ -8,17 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		AF3ED4A42CC34D9B004CB1B7 /* TASShoppingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4A32CC34D9B004CB1B7 /* TASShoppingApp.swift */; };
-		AF3ED4A62CC34D9B004CB1B7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4A52CC34D9B004CB1B7 /* ContentView.swift */; };
+		AF3ED4A62CC34D9B004CB1B7 /* TASContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4A52CC34D9B004CB1B7 /* TASContentView.swift */; };
 		AF3ED4A82CC34D9D004CB1B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF3ED4A72CC34D9D004CB1B7 /* Assets.xcassets */; };
 		AF3ED4AB2CC34D9D004CB1B7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF3ED4AA2CC34D9D004CB1B7 /* Preview Assets.xcassets */; };
+		AF3ED4B22CC34E55004CB1B7 /* TASAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4B12CC34E55004CB1B7 /* TASAccountView.swift */; };
+		AF3ED4B42CC34E6C004CB1B7 /* TASImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4B32CC34E6C004CB1B7 /* TASImageView.swift */; };
+		AF3ED4B62CC34EEE004CB1B7 /* TASDirectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4B52CC34EEE004CB1B7 /* TASDirectionsView.swift */; };
+		AF3ED4B82CC34F3F004CB1B7 /* TASNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4B72CC34F3F004CB1B7 /* TASNavigationView.swift */; };
+		AF3ED4BA2CC3506B004CB1B7 /* Directions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4B92CC3506B004CB1B7 /* Directions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AF3ED4A02CC34D9B004CB1B7 /* TASShopping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TASShopping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF3ED4A32CC34D9B004CB1B7 /* TASShoppingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASShoppingApp.swift; sourceTree = "<group>"; };
-		AF3ED4A52CC34D9B004CB1B7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AF3ED4A52CC34D9B004CB1B7 /* TASContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASContentView.swift; sourceTree = "<group>"; };
 		AF3ED4A72CC34D9D004CB1B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF3ED4AA2CC34D9D004CB1B7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AF3ED4B12CC34E55004CB1B7 /* TASAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASAccountView.swift; sourceTree = "<group>"; };
+		AF3ED4B32CC34E6C004CB1B7 /* TASImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASImageView.swift; sourceTree = "<group>"; };
+		AF3ED4B52CC34EEE004CB1B7 /* TASDirectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASDirectionsView.swift; sourceTree = "<group>"; };
+		AF3ED4B72CC34F3F004CB1B7 /* TASNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASNavigationView.swift; sourceTree = "<group>"; };
+		AF3ED4B92CC3506B004CB1B7 /* Directions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +62,12 @@
 			isa = PBXGroup;
 			children = (
 				AF3ED4A32CC34D9B004CB1B7 /* TASShoppingApp.swift */,
-				AF3ED4A52CC34D9B004CB1B7 /* ContentView.swift */,
+				AF3ED4A52CC34D9B004CB1B7 /* TASContentView.swift */,
+				AF3ED4B12CC34E55004CB1B7 /* TASAccountView.swift */,
+				AF3ED4B32CC34E6C004CB1B7 /* TASImageView.swift */,
+				AF3ED4B52CC34EEE004CB1B7 /* TASDirectionsView.swift */,
+				AF3ED4B72CC34F3F004CB1B7 /* TASNavigationView.swift */,
+				AF3ED4B92CC3506B004CB1B7 /* Directions.swift */,
 				AF3ED4A72CC34D9D004CB1B7 /* Assets.xcassets */,
 				AF3ED4A92CC34D9D004CB1B7 /* Preview Content */,
 			);
@@ -137,8 +152,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF3ED4A62CC34D9B004CB1B7 /* ContentView.swift in Sources */,
+				AF3ED4A62CC34D9B004CB1B7 /* TASContentView.swift in Sources */,
+				AF3ED4BA2CC3506B004CB1B7 /* Directions.swift in Sources */,
+				AF3ED4B22CC34E55004CB1B7 /* TASAccountView.swift in Sources */,
 				AF3ED4A42CC34D9B004CB1B7 /* TASShoppingApp.swift in Sources */,
+				AF3ED4B62CC34EEE004CB1B7 /* TASDirectionsView.swift in Sources */,
+				AF3ED4B42CC34E6C004CB1B7 /* TASImageView.swift in Sources */,
+				AF3ED4B82CC34F3F004CB1B7 /* TASNavigationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

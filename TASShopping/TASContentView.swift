@@ -6,17 +6,19 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct TASContentView: View {
-    @State private var groceryList: [String] = []
+    @StateObject private var groceryStoreModel = GroceryStoreModel()
+    @State private var groceryState: String = ""
     @State private var storeAddress: String = ""
-    @State private var state: String = ""
+    @State private var groceryList: [String] = [""]
 
     var body: some View {
         NavigationView {
             VStack {
                 Form {
-                    TextField("State", text: $state)
+                    TextField("State", text: $groceryState)
                     TextField("Store Address", text: $storeAddress)
                     ForEach(groceryList.indices, id: \.self) { index in
                         TextField("Item \(index + 1)", text: $groceryList[index])
@@ -27,7 +29,7 @@ struct TASContentView: View {
                         Text("Add Item")
                     }
                 }
-                NavigationLink(destination: TASImageView(state: state, address: storeAddress, groceryList: groceryList)) {
+                NavigationLink(destination: TASImageView(groceryStoreModel: groceryStoreModel)) {
                     Text("Generate Route")
                         .foregroundColor(.white)
                         .padding()
@@ -39,7 +41,6 @@ struct TASContentView: View {
         }
     }
 }
-
 
 #Preview {
     TASContentView()

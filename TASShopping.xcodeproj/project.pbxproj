@@ -11,11 +11,10 @@
 		AF3ED4A62CC34D9B004CB1B7 /* TASContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4A52CC34D9B004CB1B7 /* TASContentView.swift */; };
 		AF3ED4A82CC34D9D004CB1B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF3ED4A72CC34D9D004CB1B7 /* Assets.xcassets */; };
 		AF3ED4AB2CC34D9D004CB1B7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF3ED4AA2CC34D9D004CB1B7 /* Preview Assets.xcassets */; };
-		AF3ED4B22CC34E55004CB1B7 /* TASAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4B12CC34E55004CB1B7 /* TASAccountView.swift */; };
 		AF3ED4B42CC34E6C004CB1B7 /* TASImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4B32CC34E6C004CB1B7 /* TASImageView.swift */; };
-		AF3ED4B62CC34EEE004CB1B7 /* TASDirectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4B52CC34EEE004CB1B7 /* TASDirectionsView.swift */; };
-		AF3ED4B82CC34F3F004CB1B7 /* TASNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4B72CC34F3F004CB1B7 /* TASNavigationView.swift */; };
 		AF3ED4BC2CC42407004CB1B7 /* GroceryStoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4BB2CC42407004CB1B7 /* GroceryStoreModel.swift */; };
+		AF3ED4C12CC4DAED004CB1B7 /* TASAddStoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4C02CC4DAED004CB1B7 /* TASAddStoreView.swift */; };
+		AF3ED4C32CC4DB45004CB1B7 /* TASGroceryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3ED4C22CC4DB45004CB1B7 /* TASGroceryListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,12 +23,11 @@
 		AF3ED4A52CC34D9B004CB1B7 /* TASContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASContentView.swift; sourceTree = "<group>"; };
 		AF3ED4A72CC34D9D004CB1B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF3ED4AA2CC34D9D004CB1B7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		AF3ED4B12CC34E55004CB1B7 /* TASAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASAccountView.swift; sourceTree = "<group>"; };
 		AF3ED4B32CC34E6C004CB1B7 /* TASImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASImageView.swift; sourceTree = "<group>"; };
-		AF3ED4B52CC34EEE004CB1B7 /* TASDirectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASDirectionsView.swift; sourceTree = "<group>"; };
-		AF3ED4B72CC34F3F004CB1B7 /* TASNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASNavigationView.swift; sourceTree = "<group>"; };
 		AF3ED4BB2CC42407004CB1B7 /* GroceryStoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryStoreModel.swift; sourceTree = "<group>"; };
 		AF3ED4BD2CC442E8004CB1B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AF3ED4C02CC4DAED004CB1B7 /* TASAddStoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASAddStoreView.swift; sourceTree = "<group>"; };
+		AF3ED4C22CC4DB45004CB1B7 /* TASGroceryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASGroceryListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +64,8 @@
 				AF3ED4A32CC34D9B004CB1B7 /* TASShoppingApp.swift */,
 				AF3ED4A52CC34D9B004CB1B7 /* TASContentView.swift */,
 				AF3ED4B32CC34E6C004CB1B7 /* TASImageView.swift */,
-				AF3ED4B52CC34EEE004CB1B7 /* TASDirectionsView.swift */,
-				AF3ED4B72CC34F3F004CB1B7 /* TASNavigationView.swift */,
-				AF3ED4B12CC34E55004CB1B7 /* TASAccountView.swift */,
+				AF3ED4C02CC4DAED004CB1B7 /* TASAddStoreView.swift */,
+				AF3ED4C22CC4DB45004CB1B7 /* TASGroceryListView.swift */,
 				AF3ED4BB2CC42407004CB1B7 /* GroceryStoreModel.swift */,
 				AF3ED4A72CC34D9D004CB1B7 /* Assets.xcassets */,
 				AF3ED4A92CC34D9D004CB1B7 /* Preview Content */,
@@ -155,12 +152,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF3ED4A62CC34D9B004CB1B7 /* TASContentView.swift in Sources */,
-				AF3ED4B22CC34E55004CB1B7 /* TASAccountView.swift in Sources */,
+				AF3ED4C32CC4DB45004CB1B7 /* TASGroceryListView.swift in Sources */,
 				AF3ED4A42CC34D9B004CB1B7 /* TASShoppingApp.swift in Sources */,
-				AF3ED4B62CC34EEE004CB1B7 /* TASDirectionsView.swift in Sources */,
+				AF3ED4C12CC4DAED004CB1B7 /* TASAddStoreView.swift in Sources */,
 				AF3ED4BC2CC42407004CB1B7 /* GroceryStoreModel.swift in Sources */,
 				AF3ED4B42CC34E6C004CB1B7 /* TASImageView.swift in Sources */,
-				AF3ED4B82CC34F3F004CB1B7 /* TASNavigationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +290,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TASShopping/Preview Content\"";
+				DEVELOPMENT_TEAM = MB6H4MP6CL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TASShopping/Info.plist;
@@ -324,6 +321,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TASShopping/Preview Content\"";
+				DEVELOPMENT_TEAM = MB6H4MP6CL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TASShopping/Info.plist;

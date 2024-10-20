@@ -11,6 +11,8 @@ struct TASImageView: View {
     @ObservedObject var groceryStoreModel: GroceryStoreModel
     @State private var selectedStore: Store?
     @State private var showingImageSheet = false
+    @State private var showImage: Bool = false
+    
 
     var body: some View {
         List {
@@ -22,10 +24,23 @@ struct TASImageView: View {
                         .font(.subheadline)
                         .foregroundColor(.gray)
                     
+//                    if showImage {
+//                            Image(uiImage: groceryStoreModel.image)
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(maxHeight: 300)
+//                                .transition(.opacity)
+//                                .onTapGesture {
+//                                    print(groceryStoreModel.image)
+//                                }
+//                        }
+
                     Button("Generate Image") {
-                        selectedStore = store
-                        groceryStoreModel.fetchRoute(for: store) // No need for a completion handler here
-                        showingImageSheet = true // Show the sheet right away
+                        DispatchQueue.main.async {
+                            selectedStore = store
+                            groceryStoreModel.fetchRoute(for: store) {} // No need for a completion handler here
+                            showingImageSheet = true // Show the sheet right away
+                        }
                     }
                     .padding(.top, 5)
                     .foregroundColor(.green)
@@ -56,7 +71,7 @@ struct ImageSheetView: View {
                     ZoomableImageView(image: image)
                 } else {
                     Button("Load Image") {
-                        groceryStoreModel.fetchRoute(for: store)
+                        groceryStoreModel.fetchRoute(for: store) {}
                     }
                 }
             }
@@ -68,7 +83,7 @@ struct ImageSheetView: View {
         .onAppear {
             // Set loading state
             groceryStoreModel.isLoading = true
-            groceryStoreModel.fetchRoute(for: store)
+            groceryStoreModel.fetchRoute(for: store) {}
         }
         .onDisappear {
             // Reset loading state when leaving the view

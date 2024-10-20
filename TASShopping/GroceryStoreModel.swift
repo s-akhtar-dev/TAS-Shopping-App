@@ -39,123 +39,196 @@ class GroceryStoreModel: ObservableObject {
         return routeImages[store.id]
     }
 
-    func fetchRoute(for store: Store) {
-        print(store.state)
-        print(store.address)
-        print(store.groceryList)
-        // Step 1: Get Categories
-        getCategories(for: store) { categories in
-            guard let categories = categories else {
-                print("Error fetching categories")
-                return
-            }
+    func fetchRoute(for store: Store, completion: @escaping () -> Void) {
+        DispatchQueue.main.async {
+            print(store.id)
+            print(store.name)
+            print(store.address)
+            print(store.state)
+            print(store.dateAdded)
+            print(store.groceryList)
             
-            // Step 2: Categorize Items
-            self.categorizeItems(categories: categories) { groceryDic in
-                guard let groceryDic = groceryDic else {
-                    print("Error categorizing items")
+            self.isLoading = true
+            self.getCategories(for: store) { categories in
+                guard let categories = categories else {
+                    print("Error fetching categories")
+                    self.isLoading = false
+                    completion()
                     return
                 }
                 
-                // Step 3: Create Route and fetch Image
-                self.createRoute(for: store, groceryDic: groceryDic)
+                self.categorizeItems(categories: categories, groceryList: store.groceryList) { groceryDic in
+                    guard let groceryDic = groceryDic else {
+                        print("Error categorizing items")
+                        self.isLoading = false
+                        completion()
+                        return
+                    }
+                    
+                    self.createRoute(groceryDic: groceryDic, for: store) {
+                        self.isLoading = false
+                        completion()
+                    }
+                }
             }
         }
     }
 
-    private func getCategories(for store: Store, completion: @escaping ([String]?) -> Void) {
-        guard let url = URL(string: "\(baseUrl)get_categories") else { return }
+        private func getCategories(for store: Store, completion: @escaping ([String]?) -> Void) {
+            guard let url = URL(string: "\(baseUrl)/get_categories") else { return }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
+
+            // Convert state and address to lowercase as per API requirements
+            let body: [String: Any] = [
+                "state": store.state.lowercased(),
+                "address": store.address
+            ]
+            
+            print("Categories Request Body:", body) // Add logging
+            
+            request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Network Error:", error) // Add error logging
+                    completion(nil)
+                    return
+                }
+                
+                if let httpResponse = response as? HTTPURLResponse {
+                    print("Response Status Code:", httpResponse.statusCode) // Add status code logging
+                }
+                
+                if let data = data {
+                    print("Raw Response Data:", String(data: data, encoding: .utf8) ?? "Invalid data") // Add response logging
+                    
+                    if let jsonResponse = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                       let categories = jsonResponse["labels"] as? [String] {
+                        print("Parsed Categories:", categories) // Add parsed data logging
+                        completion(categories)
+                    } else {
+                        print("Failed to parse JSON response") // Add parsing error logging
+                        completion(nil)
+                    }
+                } else {
+                    print("No data received") // Add no data logging
+                    completion(nil)
+                }
+            }.resume()
+        }
+
+    private func categorizeItems(categories: [String], groceryList: [String], completion: @escaping ([String: [String]]?) -> Void) {
+        guard let url = URL(string: "\(baseUrl)/categorize_items") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
 
-        let body: [String: Any] = ["state": store.state, "address": store.address]
+        let body: [String: Any] = [
+            "categories": categories,
+            "grocery_list": groceryList
+        ]
+        
+        print("Categorize Items Request Body:", body)
+        
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                print("Error fetching categories: \(error.localizedDescription)")
+                print("Network Error in categorizeItems:", error)
                 completion(nil)
                 return
             }
             
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                print("Server error: \(response?.description ?? "Unknown error")")
-                completion(nil)
-                return
+            if let httpResponse = response as? HTTPURLResponse {
+                print("categorizeItems Response Status Code:", httpResponse.statusCode)
             }
             
-            guard let data = data else {
-                print("No data received.")
-                completion(nil)
-                return
-            }
-            
-            do {
-                if let jsonResponse = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-                   let categories = jsonResponse["labels"] as? [String] {
-                    completion(categories)
-                } else {
-                    completion(nil)
-                }
-            } catch {
-                print("JSON parsing error: \(error.localizedDescription)")
-                completion(nil)
-            }
-        }.resume()
-    }
-
-
-    private func categorizeItems(categories: [String], completion: @escaping ([String: [String]]?) -> Void) {
-        guard let url = URL(string: "\(baseUrl)categorize_items") else { return }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
-
-        let body: [String: Any] = ["categories": categories, "grocery_list": groceryList]
-        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
-
-        URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
+                print("categorizeItems Raw Response Data:", String(data: data, encoding: .utf8) ?? "Invalid data")
+                
                 if let jsonResponse = try? JSONSerialization.jsonObject(with: data) as? [String: [String]] {
+                    print("Parsed categorizeItems Response:", jsonResponse)
                     completion(jsonResponse)
                 } else {
+                    print("Failed to parse categorizeItems JSON response")
                     completion(nil)
                 }
             } else {
+                print("No data received from categorizeItems")
                 completion(nil)
             }
         }.resume()
     }
 
-    private func createRoute(for store: Store, groceryDic: [String: [String]]) {
-        guard let url = URL(string: "\(baseUrl)create_route") else { return }
+    private func createRoute(groceryDic: [String: [String]], for store: Store, completion: @escaping () -> Void) {
+        print("Creating a route...")
+        guard let url = URL(string: "\(baseUrl)/create_route") else {
+            print("Invalid URL for createRoute")
+            completion()
+            return
+        }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
 
-        let body: [String: Any] = ["state": store.state, "address": store.address, "grocery_dic": groceryDic]
+        let body: [String: Any] = [
+            "state": store.state.lowercased(),
+            "address": store.address,
+            "grocery_dic": groceryDic
+        ]
+        
+        print("Create Route Request Body:", body)
+        
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
         URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Network Error in createRoute:", error)
+                DispatchQueue.main.async {
+                    completion()
+                }
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("createRoute Response Status Code:", httpResponse.statusCode)
+            }
+            
             if let data = data {
+                print("createRoute Raw Response Data:", String(data: data, encoding: .utf8) ?? "Invalid data")
+                
                 if let jsonResponse = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
                    let base64Image = jsonResponse["image"] as? String,
                    let imageData = Data(base64Encoded: base64Image) {
                     DispatchQueue.main.async {
-                        self.image = UIImage(data: imageData) ?? UIImage()
+                        let image = UIImage(data: imageData) ?? UIImage()
+                        self.routeImages[store.id] = image
+                        self.image = image
+                        print("Successfully created and stored route image")
+                        completion()
                     }
+                } else {
+                    print("Failed to parse createRoute JSON response or create image")
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                }
+            } else {
+                print("No data received from createRoute")
+                DispatchQueue.main.async {
+                    completion()
                 }
             }
         }.resume()
     }
-
     
     func removeItem(from store: Store, item: String) {
         if let index = stores.firstIndex(where: { $0.id == store.id }) {
